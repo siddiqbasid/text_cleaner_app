@@ -383,6 +383,7 @@ if selected == "Input Multiple Text from CSV":
         st.pyplot(fig)
         # Word Cloud
         st.subheader ("Word Cloud :")
+        st.set_option('deprecation.showPyplotGlobalUse', False)
         wordcloud = WordCloud(background_color = 'white').generate(text_data)
         plt.imshow(wordcloud)
         plt.axis('off')
