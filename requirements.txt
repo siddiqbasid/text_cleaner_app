@@ -2,6 +2,6 @@ streamlit
 streamlit-option-menu
 pandas
 Sastrawi
-matplotlib.pyplot
+plotly
 seaborn
 wordcloud
