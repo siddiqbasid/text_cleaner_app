@@ -339,7 +339,7 @@ if selected == "Input Multiple Text from CSV":
         st.subheader ("Write the Row :")
         choose_row = st.text_input ("Write the Row :", value = "Tweet", label_visibility="collapsed" )
         st.subheader ("Pick the Column :")
-        values = st.slider('Select a range of values', 0, len(csv_data)-1, (0, 1))
+        values = st.slider('Select a range of values', 0, 500, (0, 1))
         st.write('Values:', values)
         a, b = values
                 
@@ -356,9 +356,6 @@ if selected == "Input Multiple Text from CSV":
         st.write (f"Data Type :  {type(text_data)}")
         word_counts = ()
 
-        running_word_counter = st.button ("Click to Run Word Counter")
-    
-        #if running_word_counter:
         text_data = lowercase (text_data)
         text_data = threeormore (text_data)
         text_data = stemming (text_data)
