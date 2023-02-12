@@ -17,7 +17,7 @@ from wordcloud import WordCloud
 st.set_page_config(layout='wide')
 
 # Default Dataset
-text_data = "UPPERCASE MENJADI lowercase\nangka 1 2 3 akan hilang\ntanda baca ! ? . @ # $ % & akan hilang \nKata-kata alay: aer aing\nStopword yang akan hilang adalah menjadi, akan, aku\nStemming kata menghilang dan mencintai"
+text_data = "Tolong Cleansing data berikut: \n1. Emoji : 😃😃😃 \n2. UPPERCASE \n3. Siaaaap \n4. Kamus alay : 3x, aer, t3tapjokowi \n5. Stemming : mencintai membacakan \n.6 Stopwords : aku dan kamu"
 csv_data = pd.read_csv("data.csv", encoding = 'ISO-8859-1')
 
 # Import kamus alay
@@ -40,6 +40,7 @@ with st.sidebar:
     # Checkbox
     st.header("Select Option :")
     all_option_check = st.checkbox ("EXECUTE ALL OPTION")
+    remove_emoji_check = st.checkbox ("Remove Emoji")
     lowercase_check = st.checkbox ("Lowercase")
     threeormore_check = st.checkbox ("Three or More")
     stemming_check = st.checkbox ("Stemming")
@@ -51,6 +52,23 @@ with st.sidebar:
     to_string_check = st.checkbox ("List to String")
     
 # FUNCTION
+# Remove emoji
+def remove_emoji (data):
+    # Remove UTF-8 format emoji 
+    data = re.sub(r'\\x[0-9A-Fa-f]{2}', '', data)
+    #return data
+    # Remove unicode format emoji
+    st.success("Success to Run 'Remove Emoji'", icon="✅")
+    emoji_pattern = re.compile("["
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+        "]+", flags=re.UNICODE)
+    return emoji_pattern.sub(r'', data)
+        
 # Lowercase
 def lowercase (data):
     data = data.lower()
@@ -146,6 +164,7 @@ if selected == "Input Text":
                 if stemming_check or lowercase_check or remove_number_check or remove_punctuation_check or tokenization_check or normalization_check or stopwords_check == True :
                     st.error('"Failed to Run "Execute All Option". Please choose "Execute All Option" ONLY !', icon="🚨")
                 else :
+                    text_data = remove_emoji (text_data)
                     text_data = lowercase (text_data)
                     text_data = threeormore (text_data)
                     text_data = stemming (text_data)
@@ -156,6 +175,10 @@ if selected == "Input Text":
                     text_data = stopwords (text_data)
                     text_data = to_string (text_data)
                     st.success("Success to Run 'Execute All Option'", icon="✅")
+
+            # Remove Emoji
+            if remove_emoji_check :
+                text_data = remove_emoji (text_data)
 
             # Lowercase
             if lowercase_check :
@@ -252,6 +275,7 @@ if selected == "Input Text from CSV":
                 if stemming_check or lowercase_check or remove_number_check or remove_punctuation_check or tokenization_check or normalization_check or stopwords_check == True :
                     st.error('"Failed to Run "Execute All Option". Please choose "Execute All Option" ONLY !', icon="🚨")
                 else :
+                    text_data = remove_emoji (text_data)
                     text_data = lowercase (text_data)
                     text_data = threeormore (text_data)
                     text_data = stemming (text_data)
@@ -262,6 +286,10 @@ if selected == "Input Text from CSV":
                     text_data = stopwords (text_data)
                     text_data = to_string (text_data)
                     st.success("Success to Run 'Execute All Option'", icon="✅")
+
+            # Remove Emoji
+            if remove_emoji_check :
+                text_data = remove_emoji (text_data)
 
             # Lowercase
             if lowercase_check :
@@ -353,9 +381,10 @@ if selected == "Input Multiple Text from CSV":
         # Input Text Used
         st.subheader ("Input Text Used :")
         st.text_area ("Input Text Used :", value = text_data, height =200, label_visibility ="collapsed" )
-        st.write (f"Data Type :  {type(text_data)}")
         word_counts = ()
-
+    
+        #if running_word_counter:
+        text_data = remove_emoji (text_data)
         text_data = lowercase (text_data)
         text_data = threeormore (text_data)
         text_data = stemming (text_data)
@@ -458,5 +487,3 @@ if selected == "Update Stopwords":
             st.subheader ("List Stopwords After Update")
             st.dataframe (df_stopwords)
 
-# REFERENCES:
-# 1. https://medium.com/product-ai/text-preprocessing-in-python-steps-tools-and-examples-bf025f872908
