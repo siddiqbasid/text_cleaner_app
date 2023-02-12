@@ -10,3 +10,10 @@ Data cleansing yang dapat dilakukan oleh aplikasi ini adalah:
 2. Lowercase : Membuat semua huruf menjadi huruf kecil (lowercase)
 3. Three or More : Menormalkan kata yang melakukan penulisan huruf yang sama secara berurutan. Misalnya : siaaaap --> siap
 4. Stemming : Mencari kata dasar dari tiap kata dengan menghilangkan imbuhan yang melekat pada kata tersebut. Misalnya : mencintai --> cinta
+5. Tokenization : Membagi teks yang panjang menjadi kata per kata
+6. Normalization (Kamus Alay) : memperbaiki kata slang menjadi kata baku sesuai data yang ada pada "Kamus Alay". Misalnya : bakalan --> akan; aj --> saja
+7. Remove Number : Menghapus angka
+8. Remove Punctuation : Menghapus tanda baca dan white space
+9. Stopwords : Menghapus kata umum yang biasanya muncul dalam jumlah besar dan dianggap tidak memiliki makna. Misalnya : aku, dan, kamu
+
+Fitur tambahan dari API ini adalah melakukan update database Kamus Alay dan Stopwords. Data barchart dan wordcloud dapat digunakan sebagai bahan pertimbangan dalam melakukan update database Kamus Alay dan Stopwords.                        
