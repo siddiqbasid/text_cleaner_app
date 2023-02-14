@@ -17,7 +17,7 @@ from wordcloud import WordCloud
 st.set_page_config(layout='wide')
 
 # Default Dataset
-text_data = "Tolong Cleansing data berikut: \n1. Emoji : 😃😃😃 \n2. UPPERCASE \n3. Siaaaap \n4. Kamus alay : 3x, aer, t3tapjokowi \n5. Stemming : mencintai membacakan \n.6 Stopwords : aku dan kamu"
+text_data = "Tolong Cleansing data berikut: \n1. Emoji : 😃😃😃 \n2. UPPERCASE \n3. Siaaaap \n4. Kamus alay : 3x, aer, t3tapjokowi \n5. Stemming : mencintai membacakan \n6. Stopwords : aku dan kamu"
 csv_data = pd.read_csv("data.csv", encoding = 'ISO-8859-1')
 
 # Import kamus alay
